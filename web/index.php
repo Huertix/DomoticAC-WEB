@@ -8,14 +8,39 @@ $table = "track";
 
 $connection = pg_connect("host=$host port=5432 dbname=$database user=$username password=$password");
 
-$sql = "select * from $table";
-$result = pg_Exec($connection, $sql);
-while($row = pg_fetch_array(($result))){
-	echo $row["id"]."---->LAT: ".$row["latitude"]."----->LNG: ".$row["longitude"];
-	echo "<BR>";
+$id = $_POST["id"];
+$lat = $_POST["lat"];
+$lng = $_POST["lng"];
+$bat_sta = $_POST["bat_sta"];
+$bat_lvl = $_POST["bat_lvl"];
+
+
+if($lat){
+
+	$sqlDel = "delete from track where id = $id;";
+
+	pg_query($connection, $sqlDel);
+
+	$sqlUpdate = "insert into track (id, latitude,longitude,battery_status,battery_level) 
+					values($id , '$lat', '$lng', '$bat_sta', '$bat_lvl');";
+
+
+
+	pg_query($connection, $sqlUpdate);
+	echo $sqlUpdate;
+	echo "<br>";
+
+
 }
 
 
-echo "Hello World!"
+
+$sql = "select * from $table order by id;";
+$result = pg_Exec($connection, $sql);
+while($row = pg_fetch_array(($result))){
+	echo "ID: ".$row["id"]."<br>LAT: ".$row["latitude"]."<br>LNG: ".$row["longitude"];
+	echo "<br>===============<br>";
+}
+
 
 ?>

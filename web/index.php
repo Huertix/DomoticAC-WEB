@@ -39,19 +39,19 @@ $sql = "select * from $table order by id;";
 $result = pg_Exec($connection, $sql);
 $i = pg_num_fields($result);
 
-for ($j = 0; $j < $i; $j++) {
+/*for ($j = 0; $j < $i; $j++) {
       echo "column $j  ||  ";
       $fieldname = pg_field_name($result, $j);
       echo "fieldname: $fieldname  ||  ";
       echo "printed length: " . pg_field_prtlen($result, $fieldname) . " characters  || ";
       echo "storage length: " . pg_field_size($result, $j) . " bytes  ||  ";
       echo "field type: " . pg_field_type($result, $j) . " <br><br>";
-  }
+  }*/
 
 
 while($row = pg_fetch_array(($result))){
 	echo "ID: ".$row["id"]."<br>LAT: ".$row["latitude"]."<br>LNG: ".$row["longitude"]
-		."<br>LNG: ".$row["longitude"];
+		."<br>BAT-STATE: ".$row["battery_status"]."<br>BAT-LEVEL: ".$row["battery_level"]."<br>Y-VALUE: ".$row["y_value"];
 	echo "<br>===============<br>";
 }
 

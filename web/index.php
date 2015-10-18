@@ -40,12 +40,12 @@ $result = pg_Exec($connection, $sql);
 $i = pg_num_fields($result);
 
 for ($j = 0; $j < $i; $j++) {
-      echo "column $j\n";
-      $fieldname = pg_field_name($res, $j);
-      echo "fieldname: $fieldname\n";
-      echo "printed length: " . pg_field_prtlen($res, $fieldname) . " characters\n";
-      echo "storage length: " . pg_field_size($res, $j) . " bytes\n";
-      echo "field type: " . pg_field_type($res, $j) . " \n\n";
+      echo "column $j  ||  ";
+      $fieldname = pg_field_name($result, $j);
+      echo "fieldname: $fieldname  ||  ";
+      echo "printed length: " . pg_field_prtlen($result, $fieldname) . " characters  || ";
+      echo "storage length: " . pg_field_size($result, $j) . " bytes  ||  ";
+      echo "field type: " . pg_field_type($result, $j) . " <br><br>";
   }
 
 
